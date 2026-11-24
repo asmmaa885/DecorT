@@ -2,7 +2,7 @@
 A responsive e-commerce landing page for handcrafted mirrors, lighting, and sculptural home décor, built with HTML, CSS, and JavaScript. Features a modern UI, product showcase, shopping cart, customer reviews, and newsletter section.
 
 ## Live Demo
-[View DecorT Website](https://asmmaa885.github.io/decort/)
+[View DecorT Website](https://asmmaa885.github.io/DecorT/)
 
 ## Features
 - Modern and responsive landing page design
