@@ -1,0 +1,1487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DecorT — Handcrafted Mirrors, Lighting &amp; Sculptural Decor</title>
+<meta name="description" content="DecorT: gilded & architectural wall mirrors, warm ambient table lamps, ceramic vessels, and sculptural stone decor.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FAF7F2; --surface:#F2ECE4; --plum:#4A1C40; --plum-h:#36122E;
+  --gold:#C6A355; --gold-t:#E6D3A3; --text:#231A21; --muted:#6E626B;
+  --line:#E4D9CB; --crimson:#8E1B2E; --amber:#F5B83D;
+  --serif:'Cormorant Garamond',Georgia,serif; --sans:'Plus Jakarta Sans',system-ui,sans-serif;
+  --r:16px; --ease:cubic-bezier(.22,.61,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block}
+button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
+a{color:inherit;text-decoration:none}
+input,select,textarea{font:inherit;color:var(--text)}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:6px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.container{width:min(1280px,100% - 48px);margin-inline:auto}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:500;line-height:1.08;letter-spacing:-.01em;color:var(--plum)}
+.eyebrow{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:700}
+.eyebrow.dark{color:#9A7B30}
+.gold-rule{display:block;width:56px;height:2px;background:linear-gradient(90deg,var(--gold),var(--gold-t));margin:1rem 0}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.95rem 1.7rem;border-radius:999px;font-size:.86rem;font-weight:600;letter-spacing:.02em;transition:background .3s var(--ease),transform .3s var(--ease),color .3s,border-color .3s,box-shadow .3s}
+.btn-primary{background:var(--plum);color:#fff;box-shadow:0 8px 22px rgba(74,28,64,.22)}
+.btn-primary:hover{background:var(--plum-h);transform:translateY(-2px);box-shadow:0 12px 28px rgba(74,28,64,.3)}
+.btn-gold{background:var(--gold);color:var(--plum-h)}
+.btn-gold:hover{background:var(--gold-t);transform:translateY(-2px)}
+.btn-ghost{border:1.5px solid var(--plum);color:var(--plum)}
+.btn-ghost:hover{background:var(--plum);color:#fff;transform:translateY(-2px)}
+.btn-block{width:100%}
+.btn[disabled]{opacity:.6;cursor:not-allowed;transform:none}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none}}
+
+/* announce */
+.announce{background:var(--plum);color:var(--gold-t);text-align:center;font-size:.8rem;padding:.6rem 1rem;letter-spacing:.04em}
+.announce b{color:var(--gold);font-weight:600}
+
+/* header */
+.header{position:sticky;top:0;z-index:50;background:rgba(250,247,242,.78);backdrop-filter:blur(18px) saturate(1.5);-webkit-backdrop-filter:blur(18px) saturate(1.5);border-bottom:1px solid rgba(198,163,85,.3)}
+.header-inner{display:flex;align-items:center;justify-content:space-between;gap:1rem;height:78px}
+.brand{display:flex;align-items:center;gap:.6rem;white-space:nowrap}
+.brand svg{width:38px;height:38px}
+.brand span{font-family:var(--serif);font-size:1.75rem;font-weight:600;color:var(--plum);letter-spacing:.02em}
+.brand span i{color:var(--gold);font-style:normal}
+.nav{display:flex;gap:1.5rem}
+.nav a{font-size:.8rem;font-weight:600;color:var(--muted);position:relative;padding:.3rem 0;transition:color .25s;white-space:nowrap}
+.nav a::after{content:"";position:absolute;left:0;bottom:-2px;width:100%;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease)}
+.nav a:hover,.nav a.active{color:var(--plum)}
+.nav a:hover::after,.nav a.active::after{transform:scaleX(1)}
+.actions{display:flex;align-items:center;gap:.4rem}
+.icon-btn{width:42px;height:42px;display:grid;place-items:center;border-radius:50%;transition:background .25s}
+.icon-btn:hover{background:var(--surface)}
+.icon-btn svg{width:21px;height:21px;stroke:var(--plum);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.search{position:relative;display:flex;align-items:center}
+.search input{width:0;opacity:0;padding:0;border:0;background:var(--surface);border-radius:999px;height:42px;font-size:.85rem;transition:width .4s var(--ease),opacity .3s,padding .4s var(--ease)}
+.search.open input{width:210px;opacity:1;padding:0 1rem;margin-right:.3rem;border:1px solid var(--line)}
+.suggest{position:absolute;top:52px;right:0;width:310px;background:var(--bg);border:1px solid var(--line);border-radius:var(--r);box-shadow:0 20px 44px rgba(74,28,64,.16);padding:.4rem;display:none;z-index:60}
+.suggest.show{display:block}
+.suggest button{display:flex;width:100%;gap:.7rem;align-items:center;text-align:left;padding:.5rem;border-radius:10px;font-size:.84rem}
+.suggest button:hover,.suggest button:focus-visible{background:var(--surface)}
+.suggest .th{width:44px;height:44px;border-radius:8px;background:var(--surface);overflow:hidden;flex:none;position:relative}
+.suggest .th img{width:100%;height:100%;object-fit:cover}
+.suggest small{color:var(--muted);display:block}
+.suggest .none{padding:.8rem;color:var(--muted);font-size:.84rem}
+.pill-cart{display:inline-flex;align-items:center;gap:.55rem;background:var(--plum);color:#fff;padding:.62rem 1.05rem;border-radius:999px;font-size:.82rem;font-weight:600;transition:background .3s,transform .3s;white-space:nowrap}
+.pill-cart:hover{background:var(--plum-h);transform:translateY(-1px)}
+.pill-cart svg{width:18px;height:18px;stroke:var(--gold);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.pill-cart .dot{color:var(--gold)}
+.menu-btn{display:none}
+
+/* placeholders */
+.ph{background:linear-gradient(145deg,#EDE3D4,#DCCDB8);position:relative;overflow:hidden;border-radius:var(--r)}
+.ph img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+
+/* hero */
+.hero{padding:clamp(2.5rem,6vw,5rem) 0 clamp(3rem,6vw,5rem);position:relative}
+.hero::before{content:"";position:absolute;right:-8%;top:-6%;width:46vw;height:46vw;max-width:640px;max-height:640px;border-radius:50%;background:radial-gradient(circle,rgba(230,211,163,.55),rgba(230,211,163,0) 68%);pointer-events:none}
+.hero-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(2rem,5vw,5rem);align-items:center;position:relative}
+.hero h1{font-size:clamp(2.8rem,5.8vw,5.2rem);margin:1rem 0 1.2rem}
+.hero h1 em{font-style:italic;color:var(--gold)}
+.hero p{color:var(--muted);max-width:46ch;font-size:1.05rem;margin-bottom:2rem}
+.hero-btns{display:flex;gap:.9rem;flex-wrap:wrap}
+.hero-meta{display:flex;gap:2.2rem;margin-top:2.8rem;font-size:.78rem;color:var(--muted)}
+.hero-meta strong{display:block;font-family:var(--serif);font-size:2rem;color:var(--plum);font-weight:500;line-height:1.1}
+.hero-visual{display:grid;grid-template-columns:1fr .56fr;gap:1rem;align-items:end;position:relative}
+.hero-main{aspect-ratio:4/5;border-radius:240px 240px var(--r) var(--r);border:1px solid var(--gold-t);box-shadow:0 30px 60px rgba(74,28,64,.18)}
+.hero-side{aspect-ratio:3/4;margin-bottom:3.2rem;border:1px solid var(--gold-t);box-shadow:0 20px 44px rgba(74,28,64,.14)}
+.hero-tag{position:absolute;left:-1.2rem;bottom:1.6rem;background:var(--bg);border:1px solid var(--gold-t);border-radius:var(--r);padding:.9rem 1.1rem;box-shadow:0 16px 38px rgba(74,28,64,.16);font-size:.78rem;max-width:230px;color:var(--muted);z-index:3}
+.hero-tag b{font-family:var(--serif);font-size:1.15rem;font-weight:600;display:block;color:var(--plum)}
+
+/* sections */
+section{scroll-margin-top:96px}
+.sec-head{display:flex;justify-content:space-between;align-items:end;gap:1.5rem;flex-wrap:wrap;margin-bottom:2rem}
+.sec-head h2{font-size:clamp(2rem,4vw,3.2rem);margin-top:.5rem}
+.sec-head p{color:var(--muted);max-width:44ch;font-size:.95rem}
+.tabs{display:flex;gap:.55rem;flex-wrap:wrap}
+.tab{padding:.6rem 1.2rem;border-radius:999px;border:1px solid var(--line);font-size:.8rem;font-weight:600;color:var(--muted);transition:all .3s var(--ease);background:var(--bg)}
+.tab:hover{border-color:var(--gold);color:var(--plum)}
+.tab[aria-pressed="true"]{background:var(--plum);border-color:var(--plum);color:#fff}
+.grid-note{font-size:.84rem;color:var(--muted);margin-bottom:1.2rem;min-height:1.4em}
+
+/* catalog */
+.catalog{padding:1rem 0 5rem}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem 1.25rem}
+.card{display:flex;flex-direction:column;animation:fadeUp .6s var(--ease) both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.card-media{position:relative;aspect-ratio:4/5;border-radius:var(--r);background:var(--surface);overflow:hidden;cursor:pointer;border:1px solid transparent;transition:border-color .3s,box-shadow .4s}
+.card-media:hover{border-color:var(--gold-t);box-shadow:0 18px 40px rgba(74,28,64,.14)}
+.card-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .9s var(--ease)}
+.card-media:hover img{transform:scale(1.09)}
+.badge{position:absolute;top:.8rem;left:.8rem;background:var(--gold);color:var(--plum-h);font-size:.64rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding:.3rem .7rem;border-radius:999px;z-index:2}
+.count-chip{position:absolute;top:.8rem;right:.8rem;z-index:2;background:rgba(250,247,242,.88);backdrop-filter:blur(6px);font-size:.68rem;font-weight:600;padding:.28rem .6rem;border-radius:999px;color:var(--plum)}
+.vp{position:absolute;left:.8rem;right:.8rem;bottom:.8rem;z-index:2;background:rgba(250,247,242,.94);backdrop-filter:blur(8px);border:1px solid var(--gold-t);border-radius:999px;padding:.65rem;font-size:.78rem;font-weight:600;color:var(--plum);text-align:center;transform:translateY(140%);transition:transform .45s var(--ease),background .25s}
+.card-media:hover .vp,.vp:focus-visible{transform:none}
+.vp:hover{background:#fff}
+@media(hover:none){.vp{transform:none}}
+.card-body{padding:.95rem .2rem 0;display:flex;flex-direction:column;gap:.32rem;flex:1}
+.card-top{display:flex;justify-content:space-between;gap:.8rem;align-items:baseline}
+.card h3{font-size:1.3rem;font-weight:600}
+.price{font-size:.98rem;font-weight:700;color:var(--plum);white-space:nowrap}
+.stars{color:var(--gold);letter-spacing:.1em;font-size:.85rem}
+.meta{display:flex;align-items:center;gap:.5rem;font-size:.76rem;color:var(--muted);flex-wrap:wrap}
+.dims{font-size:.75rem;color:var(--muted)}
+
+/* size selector pills */
+.sizes{display:flex;gap:.38rem;flex-wrap:wrap;margin:.3rem 0 .2rem}
+.sz-btn{padding:.28rem .62rem;border-radius:999px;border:1px solid var(--line);background:#fff;font-size:.7rem;font-weight:600;color:var(--muted);transition:all .22s var(--ease);display:inline-flex;align-items:center;gap:.28rem}
+.sz-btn:hover{border-color:var(--gold);color:var(--plum)}
+.sz-btn[aria-checked="true"]{background:var(--plum);border-color:var(--plum);color:#fff;box-shadow:0 3px 10px rgba(74,28,64,.18)}
+.sz-btn small{opacity:.8;font-weight:500;font-size:.66rem}
+
+.add{margin-top:auto}
+.empty{grid-column:1/-1;text-align:center;padding:4rem 1rem;color:var(--muted)}
+
+/* lookbook */
+.lookbook{background:linear-gradient(180deg,var(--surface),#EDE3D6);padding:clamp(3.5rem,7vw,6rem) 0}
+.look-wrap{position:relative;border-radius:var(--r);aspect-ratio:16/9;min-height:420px;border:1px solid var(--gold-t);box-shadow:0 30px 70px rgba(74,28,64,.16);background:linear-gradient(135deg,#F4EDE3 0%,#E6D8C5 100%);display:grid;grid-template-columns:1.25fr .75fr;gap:1.2rem;padding:1.2rem;overflow:visible}
+.look-stage{position:relative;border-radius:12px;overflow:hidden;height:100%}
+.look-stage img{width:100%;height:100%;object-fit:cover}
+.look-side{display:grid;grid-template-rows:1fr 1fr;gap:1.2rem;height:100%}
+.look-tile{position:relative;border-radius:12px;overflow:hidden}
+.look-tile img{width:100%;height:100%;object-fit:cover}
+.look-caption{position:absolute;left:1rem;bottom:1rem;background:rgba(250,247,242,.92);backdrop-filter:blur(8px);padding:.45rem .85rem;border-radius:999px;font-size:.74rem;font-weight:600;color:var(--plum);border:1px solid var(--gold-t);pointer-events:none}
+.pin{position:absolute;width:32px;height:32px;transform:translate(-50%,-50%);z-index:5}
+.pin-dot{position:absolute;inset:0;border-radius:50%;background:rgba(250,247,242,.96);border:2px solid var(--gold);display:grid;place-items:center}
+.pin-dot::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--gold)}
+.pin-dot::before{content:"";position:absolute;inset:-2px;border-radius:50%;border:2px solid var(--gold);animation:pulse 2.2s ease-out infinite}
+@keyframes pulse{0%{transform:scale(1);opacity:.9}100%{transform:scale(2.4);opacity:0}}
+.pop{position:absolute;top:calc(100% + 14px);left:50%;width:270px;transform:translate(-50%,8px);opacity:0;visibility:hidden;background:var(--bg);border:1px solid var(--gold-t);border-radius:var(--r);padding:.85rem;box-shadow:0 24px 54px rgba(74,28,64,.26);transition:all .35s var(--ease);display:flex;gap:.8rem;flex-wrap:wrap}
+.pin.flip .pop{top:auto;bottom:calc(100% + 14px)}
+.pin.left .pop{left:0;transform:translate(0,8px)}
+.pin.right .pop{left:auto;right:0;transform:translate(0,8px)}
+.pin:hover .pop,.pin:focus-within .pop,.pin.open .pop{opacity:1;visibility:visible;transform:translate(-50%,0);z-index:9}
+.pin.left:hover .pop,.pin.left:focus-within .pop,.pin.left.open .pop,.pin.right:hover .pop,.pin.right:focus-within .pop,.pin.right.open .pop{transform:none}
+.pop .th{width:68px;height:68px;border-radius:10px;overflow:hidden;background:var(--surface);flex:none;position:relative}
+.pop .th img{width:100%;height:100%;object-fit:cover}
+.pop h4{font-size:1.12rem;font-weight:600;line-height:1.2}
+.pop p{font-size:.82rem;color:var(--muted);font-weight:600}
+.pop .btn{width:100%;padding:.65rem;font-size:.8rem}
+
+/* reviews */
+.reviews{padding:clamp(4rem,8vw,6.5rem) 0}
+.rev-top{display:grid;grid-template-columns:.8fr 1.2fr;gap:3rem;align-items:center;margin-bottom:3rem;padding:2rem;background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
+.score{display:flex;align-items:center;gap:1.4rem}
+.score b{font-family:var(--serif);font-size:4.4rem;color:var(--plum);line-height:1;font-weight:500}
+.score .stars{font-size:1.1rem;display:block}
+.score small{color:var(--muted);font-size:.8rem}
+.bars{display:grid;gap:.35rem}
+.bars div{display:grid;grid-template-columns:24px 1fr 34px;gap:.7rem;align-items:center;font-size:.74rem;color:var(--muted)}
+.bars i{display:block;height:6px;border-radius:3px;background:rgba(74,28,64,.1);position:relative;overflow:hidden}
+.bars i::after{content:"";position:absolute;inset:0;width:var(--w);background:linear-gradient(90deg,var(--gold),var(--gold-t));border-radius:3px}
+.rev-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.4rem}
+.review{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:grid;grid-template-columns:.8fr 1.2fr;animation:fadeUp .6s var(--ease) both;transition:box-shadow .4s,transform .4s var(--ease)}
+.review:hover{box-shadow:0 20px 44px rgba(74,28,64,.12);transform:translateY(-3px)}
+.review .ph{border-radius:0;min-height:230px}
+.review .txt{padding:1.4rem}
+.review blockquote{font-family:var(--serif);font-size:1.3rem;line-height:1.3;color:var(--plum);margin:.5rem 0 .9rem;font-weight:500}
+.review cite{font-style:normal;font-size:.78rem;color:var(--muted);display:block}
+.ver{display:inline-flex;align-items:center;gap:.3rem;font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#7A6020;background:var(--gold-t);padding:.2rem .55rem;border-radius:999px;margin-top:.7rem}
+.showcase{margin-top:3.5rem}
+.showcase h3{font-size:1.8rem;margin-bottom:1.2rem}
+.show-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+.show-grid .ph{aspect-ratio:1;cursor:pointer}
+.show-grid .ph img{transition:transform .7s var(--ease)}
+.show-grid .ph:hover img{transform:scale(1.06)}
+.show-grid figcaption{position:absolute;left:0;right:0;bottom:0;padding:1.6rem .9rem .7rem;background:linear-gradient(transparent,rgba(54,18,46,.78));color:#fff;font-size:.76rem;z-index:2}
+
+/* story */
+.story{background:var(--plum);color:#EADFE8;padding:clamp(3.5rem,7vw,6rem) 0}
+.story h2{color:#fff;font-size:clamp(2rem,4vw,3.2rem);margin:.6rem 0 1rem}
+.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,5rem);align-items:center}
+.story p.lead{color:#D8C9D4;margin-bottom:1.6rem;max-width:50ch}
+.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.trust div{border:1px solid rgba(198,163,85,.4);border-radius:var(--r);padding:1rem;font-size:.78rem;font-weight:600;color:var(--gold-t);text-align:center}
+.trust svg{width:30px;height:30px;stroke:var(--gold);fill:none;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;margin:0 auto .5rem}
+.story-img{aspect-ratio:1/1;border:1px solid rgba(198,163,85,.5)}
+
+/* newsletter + footer */
+.news{background:linear-gradient(135deg,var(--plum-h),var(--plum));padding:clamp(3.5rem,6vw,5rem) 0;text-align:center;border-top:1px solid rgba(198,163,85,.4)}
+.news h2{color:#fff;font-size:clamp(2rem,4vw,3.1rem);margin:.6rem 0 .7rem}
+.news p{color:#D8C9D4;margin-bottom:1.6rem}
+.news form{display:flex;gap:.6rem;max-width:540px;margin:0 auto;flex-wrap:wrap;justify-content:center}
+.news input{flex:1 1 260px;padding:.95rem 1.3rem;border-radius:999px;border:1.5px solid rgba(198,163,85,.5);background:rgba(255,255,255,.08);color:#fff;font-size:.9rem}
+.news input::placeholder{color:#BFAFBB}
+.news input:focus{outline:2px solid var(--gold);outline-offset:2px}
+.news input[aria-invalid="true"]{border-color:var(--amber)}
+.form-msg{margin-top:1rem;font-size:.85rem;color:var(--gold-t);min-height:1.3em}
+.footer{background:#1D1019;color:#C9BBC6;padding:4rem 0 2rem}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:2.5rem;padding-bottom:3rem;border-bottom:1px solid rgba(198,163,85,.25)}
+.footer .brand span{color:#fff}
+.footer h4{font-family:var(--sans);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;font-weight:700}
+.footer ul{list-style:none;display:grid;gap:.55rem;font-size:.86rem}
+.footer a:hover{color:var(--gold-t)}
+.footer p{font-size:.86rem;margin-top:.9rem}
+.foot-bottom{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;padding-top:1.6rem;font-size:.76rem}
+.pay{display:flex;gap:.45rem;flex-wrap:wrap}
+.pay span{border:1px solid rgba(198,163,85,.45);color:var(--gold-t);border-radius:6px;padding:.22rem .55rem;font-size:.66rem;font-weight:700;letter-spacing:.05em}
+
+/* overlay / modal */
+.overlay{position:fixed;inset:0;background:rgba(35,26,33,.5);backdrop-filter:blur(3px);opacity:0;visibility:hidden;transition:opacity .4s var(--ease),visibility .4s;z-index:90}
+.overlay.show{opacity:1;visibility:visible}
+.modal{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:1rem;visibility:hidden;pointer-events:none}
+.modal.show{visibility:visible;pointer-events:auto}
+.modal-box{background:var(--bg);border:1px solid var(--gold-t);border-radius:22px;width:min(1000px,100%);max-height:92vh;overflow:auto;display:grid;grid-template-columns:1.05fr 1fr;transform:translateY(20px) scale(.98);opacity:0;transition:all .45s var(--ease);position:relative}
+.modal.show .modal-box{transform:none;opacity:1}
+.gal{background:var(--surface);padding:1rem;display:flex;flex-direction:column;gap:.8rem}
+.gal-main{position:relative;aspect-ratio:4/5;border-radius:var(--r);overflow:hidden;background:linear-gradient(145deg,#EDE3D4,#DCCDB8)}
+.gal-main img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.gal-nav{position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;background:rgba(250,247,242,.92);display:grid;place-items:center;font-size:1.2rem;color:var(--plum);box-shadow:0 6px 16px rgba(0,0,0,.14);z-index:3}
+.gal-nav:hover{background:#fff}
+.gal-nav.prev{left:.7rem}.gal-nav.next{right:.7rem}
+.thumbs{display:flex;gap:.6rem;overflow-x:auto}
+.thumb{width:72px;height:72px;border-radius:10px;overflow:hidden;position:relative;flex:none;border:2px solid transparent;opacity:.75;transition:all .25s;background:#E3D6C2}
+.thumb img{width:100%;height:100%;object-fit:cover}
+.thumb[aria-current="true"]{border-color:var(--gold);opacity:1}
+.thumb:hover{opacity:1}
+.modal-info{padding:2.2rem 2rem}
+.modal-info h2{font-size:2.3rem;margin:.4rem 0}
+.specs{display:grid;grid-template-columns:1fr 1fr;gap:.9rem 1rem;margin:1.2rem 0;padding:1.1rem 0;border-block:1px solid var(--line);font-size:.84rem}
+.specs dt{font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.specs dd{font-weight:600}
+.specs .wide{grid-column:1/-1}
+.note-box{font-size:.88rem;color:var(--muted);margin-bottom:1.1rem}
+.note-box b{display:block;color:var(--plum);font-family:var(--serif);font-size:1.2rem;font-weight:600;margin-bottom:.2rem}
+.opt-lbl{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-top:.6rem}
+.close{position:absolute;top:.8rem;right:.8rem;z-index:6;width:40px;height:40px;border-radius:50%;background:var(--bg);display:grid;place-items:center;font-size:1.4rem;line-height:1;box-shadow:0 4px 14px rgba(0,0,0,.12);color:var(--plum)}
+.close:hover{background:var(--surface)}
+.form-modal .modal-box{grid-template-columns:1fr;width:min(560px,100%);padding:2.2rem}
+.form-modal h2{font-size:2rem;margin-bottom:.3rem}
+.field{margin-top:1rem}
+.field label,.field legend{display:block;font-size:.76rem;font-weight:700;margin-bottom:.35rem;color:var(--plum)}
+.field input,.field select,.field textarea{width:100%;padding:.8rem 1rem;border:1.5px solid var(--line);border-radius:12px;background:#fff;transition:border-color .25s,box-shadow .25s}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(198,163,85,.25)}
+.field [aria-invalid="true"]{border-color:var(--crimson)}
+.field [aria-invalid="false"]{border-color:#7A9A6B}
+.err{font-size:.74rem;color:var(--crimson);min-height:1.1em;margin-top:.25rem}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.starpick{display:flex;gap:.2rem}
+.starpick button{font-size:1.7rem;color:#D8CFC0;transition:color .2s,transform .2s;line-height:1}
+.starpick button.on{color:var(--gold)}
+.starpick button:hover{transform:scale(1.15)}
+.counter{font-size:.72rem;color:var(--muted);text-align:right}
+.done{text-align:center;padding:1rem 0}
+.done .tick{width:66px;height:66px;border-radius:50%;background:var(--plum);color:var(--gold);display:grid;place-items:center;font-size:1.9rem;margin:0 auto 1rem;border:2px solid var(--gold)}
+
+/* drawer */
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(470px,100%);background:var(--bg);z-index:100;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .5s var(--ease);visibility:hidden;box-shadow:-24px 0 60px rgba(74,28,64,.2);border-left:1px solid var(--gold-t)}
+.drawer.show{transform:none;visibility:visible}
+.drawer-head{display:flex;justify-content:space-between;align-items:center;padding:1.2rem 1.5rem;border-bottom:1px solid var(--line)}
+.drawer-head h2{font-size:1.8rem}
+.drawer-head-actions{display:flex;align-items:center;gap:.5rem}
+.clear-btn{font-size:.74rem;font-weight:600;color:var(--muted);padding:.35rem .75rem;border-radius:999px;border:1px solid var(--line);transition:all .25s}
+.clear-btn:hover{color:var(--crimson);border-color:var(--crimson);background:rgba(142,27,46,.05)}
+.ship{padding:1rem 1.5rem;background:var(--surface);font-size:.82rem}
+.bar{height:7px;border-radius:4px;background:rgba(74,28,64,.12);margin-top:.6rem;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--plum),var(--gold));border-radius:4px;transition:width .6s var(--ease)}
+
+/* Undo Banner inside Cart Drawer */
+.undo-banner{display:none;align-items:center;justify-content:space-between;gap:.75rem;padding:.75rem 1.5rem;background:var(--plum);color:var(--gold-t);font-size:.78rem;border-bottom:1px solid var(--gold)}
+.undo-banner.show{display:flex}
+.undo-banner span b{color:#fff;font-weight:600}
+.undo-btn{background:var(--gold);color:var(--plum-h);padding:.32rem .85rem;border-radius:999px;font-size:.74rem;font-weight:700;letter-spacing:.03em;white-space:nowrap;transition:background .2s,transform .2s}
+.undo-btn:hover{background:var(--gold-t);transform:translateY(-1px)}
+
+.drawer-body{flex:1;overflow:auto}
+.items{padding:.3rem 1.5rem}
+.line-item{display:grid;grid-template-columns:76px 1fr auto;gap:.9rem;padding:1rem 0;border-bottom:1px solid var(--line)}
+.line-item .th{width:76px;height:92px;border-radius:10px;background:var(--surface);overflow:hidden;position:relative}
+.line-item .th img{width:100%;height:100%;object-fit:cover}
+.line-item h3{font-size:1.12rem;font-weight:600}
+.line-item small{color:var(--muted);font-size:.74rem;display:block}
+.line-item .sz-tag{display:inline-block;margin-top:.25rem;padding:.12rem .5rem;border-radius:999px;background:var(--surface);border:1px solid var(--line);font-size:.68rem;font-weight:600;color:var(--plum)}
+.qty{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:999px;margin-top:.5rem;background:#fff}
+.qty button{width:30px;height:30px;font-size:1rem}
+.qty button:hover{background:var(--surface);border-radius:50%}
+.qty span{min-width:24px;text-align:center;font-size:.84rem;font-weight:700}
+.rm{font-size:.72rem;color:var(--muted);text-decoration:underline;margin-top:.4rem;display:block;margin-left:auto}
+.rm:hover{color:var(--crimson)}
+.li-price{font-weight:700;font-size:.9rem;text-align:right;color:var(--plum)}
+.cart-empty{text-align:center;padding:3.5rem 1rem;color:var(--muted)}
+.cart-empty h3{font-size:1.6rem;margin-bottom:.4rem}
+.promo{padding:0 1.5rem 1rem}
+.promo form{display:flex;gap:.5rem}
+.promo input{flex:1;padding:.7rem 1rem;border:1.5px dashed var(--gold);border-radius:999px;background:#fff;text-transform:uppercase;font-size:.82rem;letter-spacing:.08em}
+.promo input:focus{outline:2px solid var(--gold);outline-offset:2px}
+.promo .btn{padding:.7rem 1.2rem;font-size:.8rem}
+.promo small{display:block;color:var(--muted);font-size:.72rem;margin-top:.4rem}
+.drawer-foot{padding:1.1rem 1.5rem 1.3rem;border-top:1px solid var(--line);background:#fff}
+.sum{display:flex;justify-content:space-between;font-size:.86rem;margin-bottom:.25rem;color:var(--muted)}
+.sum.disc{color:#6B7F3A;font-weight:600}
+.sum.total{font-weight:700;font-size:1.1rem;margin:.55rem 0 .9rem;color:var(--plum);padding-top:.55rem;border-top:1px solid var(--line)}
+.pay-title{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:.5rem}
+.pay-opts{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:1rem}
+.pay-opt{border:1.5px solid var(--line);border-radius:12px;padding:.55rem .7rem;text-align:left;font-size:.76rem;font-weight:600;transition:all .25s;background:var(--bg)}
+.pay-opt small{display:block;color:var(--muted);font-weight:500;font-size:.7rem}
+.pay-opt:hover{border-color:var(--gold)}
+.pay-opt[aria-checked="true"]{border-color:var(--plum);background:rgba(74,28,64,.05);box-shadow:inset 0 0 0 1px var(--plum)}
+.fine{font-size:.72rem;color:var(--muted);text-align:center;margin-top:.7rem}
+
+/* floating bar */
+.float-bar{position:fixed;right:20px;bottom:20px;z-index:80;display:flex;align-items:center;gap:.8rem;background:var(--plum);color:#fff;padding:.8rem 1.2rem .8rem 1rem;border-radius:999px;box-shadow:0 18px 40px rgba(74,28,64,.38);border:1px solid var(--gold);transform:translateY(120px);opacity:0;visibility:hidden;transition:all .5s var(--ease);font-size:.85rem;font-weight:600}
+.float-bar.show{transform:none;opacity:1;visibility:visible}
+.float-bar:hover{background:var(--plum-h)}
+.float-bar .n{background:var(--gold);color:var(--plum-h);width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-size:.76rem;font-weight:700}
+.float-bar .t{color:var(--gold-t)}
+
+/* toasts */
+.toasts{position:fixed;top:92px;right:20px;z-index:200;display:grid;gap:.7rem;width:min(380px,calc(100% - 40px));pointer-events:none}
+.toast{pointer-events:auto;display:grid;grid-template-columns:auto 1fr auto;gap:.8rem;align-items:center;padding:.9rem 1rem;border-radius:14px;box-shadow:0 18px 40px rgba(35,26,33,.3);transform:translateX(120%);opacity:0;transition:transform .5s var(--ease),opacity .4s;font-size:.84rem;line-height:1.4}
+.toast.in{transform:none;opacity:1}
+.toast .ic{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:.85rem}
+.toast b{display:block;font-size:.86rem;margin-bottom:.1rem}
+.toast .t-act{display:flex;align-items:center;gap:.45rem}
+.toast .t-undo{padding:.28rem .7rem;border-radius:999px;font-size:.72rem;font-weight:700;background:var(--plum);color:var(--gold-t);border:1px solid var(--gold);transition:background .2s}
+.toast .t-undo:hover{background:var(--plum-h);color:#fff}
+.toast .x{font-size:1.1rem;line-height:1;opacity:.7;padding:.2rem}
+.toast .x:hover{opacity:1}
+.toast.success{background:var(--plum);color:var(--gold-t);border:1px solid var(--gold)}
+.toast.success .ic{background:var(--gold);color:var(--plum-h)}
+.toast.success b{color:#fff}
+.toast.error{background:var(--crimson);color:#FFE3A8;border:1px solid var(--amber)}
+.toast.error .ic{background:var(--amber);color:var(--crimson)}
+.toast.error b{color:#fff}
+.toast.warn{background:var(--amber);color:#4A2A00;border:1px solid #C98B0B}
+.toast.warn .ic{background:var(--crimson);color:#fff}
+.toast.warn .x{color:#4A2A00}
+
+/* responsive */
+@media(max-width:1180px){.nav{gap:1.1rem}.nav a{font-size:.76rem}}
+@media(max-width:1060px){
+  .menu-btn{display:grid}
+  .nav{position:fixed;top:0;left:0;bottom:0;width:min(330px,86%);background:var(--bg);flex-direction:column;padding:5.5rem 2rem 2rem;gap:1.2rem;transform:translateX(-100%);transition:transform .45s var(--ease);z-index:95;visibility:hidden;box-shadow:20px 0 60px rgba(0,0,0,.15)}
+  .nav.open{transform:none;visibility:visible}
+  .nav a{font-family:var(--serif);font-size:1.7rem;color:var(--plum);font-weight:600}
+  .grid{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:960px){
+  .hero-grid,.story-grid,.rev-top{grid-template-columns:1fr}
+  .rev-grid{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr 1fr}
+  .modal-box{grid-template-columns:1fr}
+  .show-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:720px){
+  .container{width:min(1280px,100% - 32px)}
+  .grid{grid-template-columns:repeat(2,1fr);gap:1.3rem .8rem}
+  .look-wrap{grid-template-columns:1fr;aspect-ratio:auto;min-height:520px}
+  .look-stage{min-height:280px}
+  .look-side{grid-template-columns:1fr 1fr;grid-template-rows:160px}
+  .search.open input{width:130px}
+  .pill-cart .lbl-bag{display:none}
+  .hero-side{display:none}.hero-visual{grid-template-columns:1fr}
+  .hero-tag{left:.8rem}
+  .tabs{flex-wrap:nowrap;overflow-x:auto;padding-bottom:.4rem;margin-right:-16px;scrollbar-width:none}
+  .tab{white-space:nowrap}
+  .card h3{font-size:1.1rem}.card-top{flex-direction:column;gap:0}
+  .foot-grid{grid-template-columns:1fr}
+  .review{grid-template-columns:1fr}.review .ph{min-height:200px}
+  .trust{gap:.5rem}.trust div{padding:.7rem .4rem;font-size:.7rem}
+  .pop{width:220px}
+  .row2{grid-template-columns:1fr}
+  .float-bar{right:12px;bottom:12px}
+  .toasts{top:84px;right:12px}
+  .brand span{font-size:1.5rem}
+}
+</style>
+</head>
+<body>
+
+<div class="announce">Complimentary insured &amp; plastic-free shipping on <b>DecorT</b> orders over <b>$150</b></div>
+
+<header class="header">
+  <div class="container header-inner">
+    <button class="icon-btn menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <a href="#top" class="brand" aria-label="DecorT home">
+      <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="#4A1C40" stroke="#C6A355" stroke-width="1.5"/><path d="M16 12h8c8 0 12 5 12 12s-4 12-12 12h-8Z" fill="none" stroke="#E6D3A3" stroke-width="2.2"/><path d="M21 18v12M17 18h9" stroke="#C6A355" stroke-width="2.2" stroke-linecap="round"/><circle cx="35" cy="13" r="2.2" fill="#C6A355"/></svg>
+      <span>Decor<i>T</i></span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Primary">
+      <a href="#shop" data-group="all" class="active">All Decor</a>
+      <a href="#shop" data-group="mirrors">Wall Mirrors</a>
+      <a href="#shop" data-group="lighting">Table Lamps</a>
+      <a href="#shop" data-group="ceramics">Vessels &amp; Vases</a>
+      <a href="#reviews" data-link="reviews">Reviews</a>
+    </nav>
+    <div class="actions">
+      <div class="search" id="search">
+        <label class="sr-only" for="searchInput">Search products</label>
+        <input type="search" id="searchInput" placeholder="Search mirrors, lamps…" autocomplete="off">
+        <button class="icon-btn" id="searchBtn" aria-label="Toggle search" aria-expanded="false">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4-4"/></svg>
+        </button>
+        <div class="suggest" id="suggest" aria-label="Search suggestions"></div>
+      </div>
+      <button class="pill-cart" id="cartPill" aria-label="Open bag">
+        <svg viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6L5 8Z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg>
+        <span><span class="lbl-bag">Bag </span><span id="pillCount">(0)</span> <span class="dot">•</span> <span id="pillTotal">$0</span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="reveal">
+        <span class="eyebrow">The Autumn Collection · Small-batch</span>
+        <h1>Sculptural objects crafted to anchor a <em>quiet</em> home</h1>
+        <span class="gold-rule"></span>
+        <p>Hand-gilded antique mirrors, opaline glass table lamps, solid oak frames and living brass — made slowly by independent artisans, for rooms that breathe.</p>
+        <div class="hero-btns">
+          <a class="btn btn-primary" href="#shop">Explore Full Gallery</a>
+          <a class="btn btn-ghost" href="#vignette">Shop the Vignette</a>
+        </div>
+        <div class="hero-meta">
+          <div><strong>42</strong>independent makers</div>
+          <div><strong>4.9</strong>collector rating</div>
+          <div><strong>0</strong>plastic in transit</div>
+        </div>
+      </div>
+      <div class="hero-visual reveal">
+        <div class="ph hero-main" id="heroMain"></div>
+        <div class="ph hero-side" id="heroSide"></div>
+        <div class="hero-tag"><b>Baroque Gold Mirror</b>Hand-gilded antique leaf, from $265</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATALOG -->
+  <section class="catalog" id="shop">
+    <div class="container">
+      <div class="sec-head reveal">
+        <div><span class="eyebrow dark">All Product Gallery &amp; Catalog</span><h2>The curated collection</h2></div>
+        <div class="tabs" role="group" aria-label="Filter catalog" id="tabs"></div>
+      </div>
+      <p class="grid-note" id="gridNote" aria-live="polite"></p>
+      <div class="grid" id="grid"></div>
+    </div>
+  </section>
+
+  <!-- LOOKBOOK -->
+  <section class="lookbook" id="vignette">
+    <div class="container">
+      <div class="sec-head reveal">
+        <div><span class="eyebrow dark">Shop the Vignette</span><h2>A room, styled slowly</h2></div>
+        <p>Hover or tap the pulsing gold pins on our real studio photographs to inspect each piece — then add it straight to your bag.</p>
+      </div>
+      <div class="look-wrap reveal" id="look">
+        <div class="look-stage">
+          <img src="https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=1200&q=85" alt="Leather-Strap Round Wall Mirror styled above console">
+          <span class="look-caption">Entryway Wall · Leather-Strap Mirror</span>
+        </div>
+        <div class="look-side">
+          <div class="look-tile">
+            <img src="https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=900&q=85" alt="White Ceramic Dome Table Lamp on oak table">
+            <span class="look-caption">Oak Side Table · Ceramic Lamp</span>
+          </div>
+          <div class="look-tile">
+            <img src="https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?auto=format&fit=crop&w=900&q=85" alt="Opaline Dome Brass Table Lamp glowing warmly">
+            <span class="look-caption">Nightstand · Opaline Brass Lamp</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="reviews" id="reviews">
+    <div class="container">
+      <div class="sec-head reveal">
+        <div><span class="eyebrow dark">Verified Collectors</span><h2>Loved in real homes</h2></div>
+        <button class="btn btn-primary" id="writeRev">Write a Review</button>
+      </div>
+      <div class="rev-top reveal">
+        <div class="score"><b>4.9</b><div><span class="stars" aria-label="4.9 out of 5">★★★★★</span><small>Based on 412 verified buyer reviews</small></div></div>
+        <div class="bars" aria-hidden="true">
+          <div><span>5★</span><i style="--w:92%"></i><span>92%</span></div>
+          <div><span>4★</span><i style="--w:6%"></i><span>6%</span></div>
+          <div><span>3★</span><i style="--w:1.5%"></i><span>1%</span></div>
+          <div><span>2★</span><i style="--w:.5%"></i><span>0%</span></div>
+          <div><span>1★</span><i style="--w:0%"></i><span>0%</span></div>
+        </div>
+      </div>
+      <div class="rev-grid" id="revGrid"></div>
+      <div class="showcase reveal">
+        <h3>Styled Home Showcase</h3>
+        <div class="show-grid" id="showGrid"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORY -->
+  <section class="story" id="craft">
+    <div class="container story-grid">
+      <div class="reveal">
+        <span class="eyebrow">Materiality &amp; Craft</span>
+        <h2>Made by hand, meant to be lived beside</h2>
+        <span class="gold-rule"></span>
+        <p class="lead">Hand-gilded antique mirrors, opaline glass table lamps, solid carved travertine and living brass. Nothing is rushed, nothing is cast in plastic, and every piece travels wrapped in paper and insured to your door.</p>
+        <div class="trust">
+          <div><svg viewBox="0 0 24 24"><path d="M7 20c0-4 2-6 5-6s5 2 5 6"/><circle cx="12" cy="8" r="3.5"/></svg>Small-Batch Artisans</div>
+          <div><svg viewBox="0 0 24 24"><path d="M12 3 4 8v8l8 5 8-5V8l-8-5Z"/><path d="m4 8 8 5 8-5M12 13v8"/></svg>Solid Natural Materials</div>
+          <div><svg viewBox="0 0 24 24"><path d="M12 3 5 6v5c0 5 3 8 7 10 4-2 7-5 7-10V6l-7-3Z"/><path d="m9 12 2 2 4-4"/></svg>Breakage-Free Transit</div>
+        </div>
+      </div>
+      <div class="ph story-img reveal" id="storyImg"></div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="news">
+    <div class="container reveal">
+      <span class="eyebrow">The Collector's List</span>
+      <h2>Join the DecorT Collector's List</h2>
+      <p>New releases, studio visits and styling notes — plus 10% off your first piece.</p>
+      <form id="newsForm" novalidate>
+        <label class="sr-only" for="newsEmail">Email address</label>
+        <input type="email" id="newsEmail" placeholder="Your email address" required>
+        <button class="btn btn-gold" type="submit">Subscribe</button>
+      </form>
+      <div class="form-msg" id="newsMsg" role="status"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <a href="#top" class="brand" aria-label="DecorT">
+          <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="#4A1C40" stroke="#C6A355" stroke-width="1.5"/><path d="M16 12h8c8 0 12 5 12 12s-4 12-12 12h-8Z" fill="none" stroke="#E6D3A3" stroke-width="2.2"/><path d="M21 18v12M17 18h9" stroke="#C6A355" stroke-width="2.2" stroke-linecap="round"/><circle cx="35" cy="13" r="2.2" fill="#C6A355"/></svg>
+          <span>Decor<i>T</i></span>
+        </a>
+        <p>Handcrafted mirrors, warm ambient lighting, ceramic and stone for quiet, sunlit rooms.</p>
+        <p><b style="color:#fff">Studio &amp; Showroom</b><br>14 Gallery Lane, Dhaka<br>Tue–Sun · 11am–7pm</p>
+      </div>
+      <div><h4>Shop</h4><ul>
+        <li><a href="#shop" data-group="all">All Decor</a></li>
+        <li><a href="#shop" data-group="mirrors">Wall Mirrors</a></li>
+        <li><a href="#shop" data-group="lighting">Table Lamps</a></li>
+        <li><a href="#shop" data-group="ceramics">Vessels &amp; Vases</a></li>
+        <li><a href="#" data-ph>Gift Cards</a></li></ul></div>
+      <div><h4>Care Guides</h4><ul>
+        <li><a href="#" data-ph>Caring for Gilded Frames</a></li>
+        <li><a href="#" data-ph>Travertine &amp; Stone</a></li>
+        <li><a href="#" data-ph>Living Brass Patina</a></li>
+        <li><a href="#" data-ph>Shipping &amp; Returns</a></li>
+        <li><a href="#" data-ph>Trade Program</a></li></ul></div>
+      <div><h4>Secure Payments</h4>
+        <div class="pay" aria-label="Accepted payments"><span>VISA</span><span>MASTERCARD</span><span>AMEX</span><span>APPLE PAY</span><span>GOOGLE PAY</span><span>KLARNA</span><span>PAYPAL</span></div>
+        <p>All transactions are encrypted. Insured, plastic-free packaging on every order.</p>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 DecorT. All rights reserved.</span>
+      <span><a href="#" data-ph>Privacy</a> · <a href="#" data-ph>Terms</a></span>
+    </div>
+  </div>
+</footer>
+
+<button class="float-bar" id="floatBar" aria-label="View cart and total">
+  <span class="n" id="floatN">0</span><span>View Cart &amp; Total</span><span class="t" id="floatT">$0</span>
+</button>
+
+<div class="overlay" id="overlay"></div>
+<div class="toasts" id="toasts" aria-live="polite" aria-atomic="false"></div>
+
+<!-- Cart drawer -->
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Shopping bag" aria-hidden="true">
+  <div class="drawer-head">
+    <h2>Your Bag</h2>
+    <div class="drawer-head-actions">
+      <button class="clear-btn" id="clearCartBtn" aria-label="Clear all items from bag" style="display:none">Clear All</button>
+      <button class="icon-btn" data-close="drawer" aria-label="Close bag"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    </div>
+  </div>
+  <div class="ship" id="shipMsg"></div>
+  <!-- Undo Recently Removed Banner -->
+  <div class="undo-banner" id="undoBanner" role="region" aria-live="polite">
+    <span id="undoBannerText">Removed item</span>
+    <button class="undo-btn" id="undoBannerBtn" type="button">Undo</button>
+  </div>
+  <div class="drawer-body">
+    <div class="items" id="items"></div>
+    <div class="promo">
+      <form id="promoForm" novalidate>
+        <label class="sr-only" for="promoInput">Promo code</label>
+        <input id="promoInput" placeholder="Promo code" autocomplete="off">
+        <button class="btn btn-ghost" type="submit">Apply</button>
+      </form>
+      <small>Try <b>DECORT10</b> for 10% off.</small>
+    </div>
+  </div>
+  <div class="drawer-foot" id="drawerFoot"></div>
+</aside>
+
+<!-- Gallery modal -->
+<div class="modal" id="galModal" role="dialog" aria-modal="true" aria-labelledby="galTitle" aria-hidden="true"><div class="modal-box" id="galBox"></div></div>
+<!-- Review modal -->
+<div class="modal form-modal" id="revModal" role="dialog" aria-modal="true" aria-labelledby="revTitle" aria-hidden="true"><div class="modal-box" id="revBox"></div></div>
+<!-- Checkout modal -->
+<div class="modal form-modal" id="coModal" role="dialog" aria-modal="true" aria-labelledby="coTitle" aria-hidden="true"><div class="modal-box" id="coBox"></div></div>
+
+<script>
+/* ================= DATA & CATEGORY-MATCHED PHOTOGRAPHS ================= */
+const PHOTOS = {
+  // Wall Mirrors
+  strapMirror:   'https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=900&q=85',
+  oakMirror:     'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=900&q=85',
+  archMirror:    'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=85',
+  baroqueFront:  'https://images.unsplash.com/photo-1595515106969-1ce29566ff1c?auto=format&fit=crop&w=900&q=85',
+  baroqueAngle:  'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=900&q=85',
+  rococoMirror:  'https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?auto=format&fit=crop&w=900&q=85',
+  // Table Lamps
+  ceramicLamp:   'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=900&q=85',
+  brassLamp:     'https://images.unsplash.com/photo-1540932239986-30128078f3c5?auto=format&fit=crop&w=900&q=85',
+  opalineLamp:   'https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?auto=format&fit=crop&w=900&q=85',
+  // Ceramic Vessels & Vases
+  flutedVase:    'https://images.unsplash.com/photo-1578500494198-246f612d3b3d?auto=format&fit=crop&w=900&q=85',
+  terracottaSet: 'https://images.unsplash.com/photo-1612196808214-b8e1d6145a8c?auto=format&fit=crop&w=900&q=85',
+  stonewareUrn:  'https://images.unsplash.com/photo-1581783342308-f792dbdd27c5?auto=format&fit=crop&w=900&q=85'
+};
+
+const GROUPS = {
+  all: null,
+  mirrors: ['mirrors'],
+  lighting: ['lighting'],
+  ceramics: ['ceramics']
+};
+
+const TABS = [
+  ['all','All Pieces'],
+  ['mirrors','Wall Mirrors'],
+  ['lighting','Table Lamps'],
+  ['ceramics','Vessels & Vases']
+];
+
+const CATNAME = {
+  mirrors:'Wall Mirrors',
+  lighting:'Table Lamps',
+  ceramics:'Vessels & Vases'
+};
+
+const PRODUCTS = [
+  {
+    id: 1,
+    name: 'Leather-Strap Round Wall Mirror',
+    cat: 'mirrors',
+    kind: 'mirror',
+    tag: 'Bestseller',
+    photos: [PHOTOS.strapMirror, PHOTOS.oakMirror],
+    sizes: [
+      { key: 'Small', short: 'S', dim: 'Ø 45 cm', fullDim: 'Ø 45 × D 3.5 cm (Strap H 68 cm)', price: 185 },
+      { key: 'Medium', short: 'M', dim: 'Ø 65 cm', fullDim: 'Ø 65 × D 3.5 cm (Strap H 92 cm)', price: 245 },
+      { key: 'Large', short: 'L', dim: 'Ø 85 cm', fullDim: 'Ø 85 × D 4.0 cm (Strap H 116 cm)', price: 315 }
+    ],
+    rating: 4.9,
+    reviews: 118,
+    weight: '4.2 kg',
+    material: 'Bevelled crystal glass, full-grain bridle leather, solid brass buckle',
+    origin: 'Assembled by hand in Copenhagen, Denmark',
+    note: 'Suspends from a solid turned brass wall peg. The stitched leather harness brings architectural warmth to entryways and dressing corners.'
+  },
+  {
+    id: 2,
+    name: 'Baroque Gold Filigree Oval Mirror',
+    cat: 'mirrors',
+    kind: 'mirror',
+    tag: 'Signature',
+    photos: [PHOTOS.baroqueFront, PHOTOS.baroqueAngle],
+    sizes: [
+      { key: 'Small', short: 'S', dim: '52 × 38 cm', fullDim: 'H 52 × W 38 × D 4 cm', price: 265 },
+      { key: 'Medium', short: 'M', dim: '74 × 52 cm', fullDim: 'H 74 × W 52 × D 4.5 cm', price: 345 },
+      { key: 'Large', short: 'L', dim: '96 × 68 cm', fullDim: 'H 96 × W 68 × D 5 cm', price: 435 }
+    ],
+    rating: 5.0,
+    reviews: 94,
+    weight: '5.6 kg',
+    material: 'Hand-carved acanthus frame finished in 22k antique gold leaf',
+    origin: 'Gilded in Florence, Italy',
+    note: 'Intricate pierced floral scrollwork catches candlelight and soft morning sun—an instant heirloom focal point above a console or mantel.'
+  },
+  {
+    id: 3,
+    name: 'Brass Mushroom Glow Lamp',
+    cat: 'lighting',
+    kind: 'lamp',
+    tag: 'Studio Pick',
+    photos: [PHOTOS.opalineLamp, PHOTOS.brassLamp],
+    sizes: [
+      { key: 'Small', short: 'S', dim: 'H 32 cm', fullDim: 'H 32 × Ø 22 cm', price: 195 },
+      { key: 'Medium', short: 'M', dim: 'H 42 cm', fullDim: 'H 42 × Ø 28 cm', price: 255 },
+      { key: 'Large', short: 'L', dim: 'H 52 cm', fullDim: 'H 52 × Ø 34 cm', price: 320 }
+    ],
+    rating: 4.9,
+    reviews: 82,
+    weight: '3.1 kg',
+    material: 'Hand-blown milk-white opaline glass dome, satin brushed brass stem',
+    origin: 'Crafted in Milan, Italy',
+    note: 'Cast in a single mouth-blown glass dome that eliminates harsh glare and bathes nightstands and reading nooks in a honeyed 2400K halo.'
+  },
+  {
+    id: 4,
+    name: 'Ceramic Dome Table Lamp',
+    cat: 'lighting',
+    kind: 'lamp',
+    tag: 'Bestseller',
+    photos: [PHOTOS.ceramicLamp, PHOTOS.opalineLamp],
+    sizes: [
+      { key: 'Small', short: 'S', dim: 'H 28 cm', fullDim: 'H 28 × Ø 24 cm', price: 168 },
+      { key: 'Medium', short: 'M', dim: 'H 36 cm', fullDim: 'H 36 × Ø 30 cm', price: 218 },
+      { key: 'Large', short: 'L', dim: 'H 44 cm', fullDim: 'H 44 × Ø 36 cm', price: 274 }
+    ],
+    rating: 4.9,
+    reviews: 105,
+    weight: '2.8 kg',
+    material: 'Wheel-thrown matte stoneware sphere with softly flared shade',
+    origin: 'Thrown & glazed in Kyoto, Japan',
+    note: 'A calm, pebble-like ceramic base paired with a softly flared shade—ideal for oak side tables, bookshelves, and quiet evening rituals.'
+  },
+  {
+    id: 5,
+    name: 'Scalloped Gilded Crest Mirror',
+    cat: 'mirrors',
+    kind: 'mirror',
+    tag: 'Limited',
+    photos: [PHOTOS.rococoMirror, PHOTOS.baroqueFront],
+    sizes: [
+      { key: 'Small', short: 'S', dim: '58 × 40 cm', fullDim: 'H 58 × W 40 × D 4 cm', price: 285 },
+      { key: 'Medium', short: 'M', dim: '80 × 54 cm', fullDim: 'H 80 × W 54 × D 4.5 cm', price: 375 },
+      { key: 'Large', short: 'L', dim: '104 × 70 cm', fullDim: 'H 104 × W 70 × D 5 cm', price: 465 }
+    ],
+    rating: 4.9,
+    reviews: 67,
+    weight: '6.1 kg',
+    material: 'Sculpted crest frame with hand-rubbed burnished gold patina',
+    origin: 'Finished in Lyon, France',
+    note: 'Its violin-waisted silhouette and acanthus crest soften stark plaster walls while reflecting natural depth across dining rooms.'
+  },
+  {
+    id: 6,
+    name: 'Heritage Brass Shade Lamp',
+    cat: 'lighting',
+    kind: 'lamp',
+    tag: 'Warm Glow',
+    photos: [PHOTOS.brassLamp, PHOTOS.ceramicLamp],
+    sizes: [
+      { key: 'Small', short: 'S', dim: 'H 38 cm', fullDim: 'H 38 × Ø 26 cm', price: 210 },
+      { key: 'Medium', short: 'M', dim: 'H 48 cm', fullDim: 'H 48 × Ø 33 cm', price: 268 },
+      { key: 'Large', short: 'L', dim: 'H 58 cm', fullDim: 'H 58 × Ø 40 cm', price: 335 }
+    ],
+    rating: 4.8,
+    reviews: 73,
+    weight: '3.9 kg',
+    material: 'Turned solid brass pedestal, walnut plinth, parchment-lined shade',
+    origin: 'Milled in Jaipur, India',
+    note: 'Throws dramatic upward and downward pools of warm light—designed for writing desks, sideboards, and intimate lounge corners.'
+  },
+  {
+    id: 7,
+    name: 'Fluted Matte Ceramic Vessel',
+    cat: 'ceramics',
+    kind: 'vase',
+    tag: 'New',
+    photos: [PHOTOS.flutedVase, PHOTOS.stonewareUrn],
+    sizes: [
+      { key: 'Small', short: 'S', dim: 'H 20 cm', fullDim: 'H 20 × Ø 14 cm', price: 95 },
+      { key: 'Medium', short: 'M', dim: 'H 28 cm', fullDim: 'H 28 × Ø 18 cm', price: 138 },
+      { key: 'Large', short: 'L', dim: 'H 36 cm', fullDim: 'H 36 × Ø 22 cm', price: 182 }
+    ],
+    rating: 4.9,
+    reviews: 64,
+    weight: '2.1 kg',
+    material: 'Hand-thrown unglazed stoneware with vertical ribbing',
+    origin: 'Kiln-fired in Oaxaca, Mexico',
+    note: 'Designed for dried botanical stems or standalone shelf styling—the ribbed stoneware catches oblique afternoon shadows.'
+  },
+  {
+    id: 8,
+    name: 'Sculpted Terracotta Amphora Trio',
+    cat: 'ceramics',
+    kind: 'vase',
+    tag: 'Gallery Edit',
+    photos: [PHOTOS.terracottaSet, PHOTOS.stonewareUrn],
+    sizes: [
+      { key: 'Small', short: 'S', dim: 'H 18 cm', fullDim: 'H 18 × Ø 13 cm', price: 112 },
+      { key: 'Medium', short: 'M', dim: 'H 25 cm', fullDim: 'H 25 × Ø 17 cm', price: 156 },
+      { key: 'Large', short: 'L', dim: 'H 34 cm', fullDim: 'H 34 × Ø 21 cm', price: 205 }
+    ],
+    rating: 4.9,
+    reviews: 88,
+    weight: '3.4 kg',
+    material: 'Raw mineral clay with hand-burnished matte slip',
+    origin: 'Crafted in Seville, Spain',
+    note: 'Organic silhouettes with tactile mineral grain that anchor console tables, bookshelves, and sunlit window ledges.'
+  }
+];
+
+const REVIEWS = [
+  {
+    name: 'Amelia R.',
+    city: 'Brooklyn',
+    pid: 2,
+    stars: 5,
+    quote: 'The Baroque Gold Filigree Mirror turned our entryway into a small gallery. The antique gold leaf catches the late afternoon sun effortlessly.',
+    photo: PHOTOS.baroqueAngle
+  },
+  {
+    name: 'Daniel K.',
+    city: 'London',
+    pid: 3,
+    stars: 5,
+    quote: 'Arrived without a scratch, wrapped completely plastic-free. The Brass Mushroom Glow Lamp gives our bedroom the warmest evening glow.',
+    photo: PHOTOS.opalineLamp
+  },
+  {
+    name: 'Sofia M.',
+    city: 'Lisbon',
+    pid: 1,
+    stars: 5,
+    quote: 'Ordered the Medium Leather-Strap Mirror—the brass buckle detail and weight of the glass feel genuinely bespoke.',
+    photo: PHOTOS.strapMirror
+  },
+  {
+    name: 'Priya N.',
+    city: 'Dhaka',
+    pid: 4,
+    stars: 5,
+    quote: 'The Ceramic Dome Table Lamp sits beside my oak reading table and calms the whole room down at night.',
+    photo: PHOTOS.ceramicLamp
+  }
+];
+
+const SHOWCASE = [
+  { photo: PHOTOS.strapMirror, cap: 'Entryway · Leather-Strap Round Mirror' },
+  { photo: PHOTOS.ceramicLamp, cap: 'Bedside · Ceramic Dome Table Lamp' },
+  { photo: PHOTOS.rococoMirror, cap: 'Salon Wall · Scalloped Gilded Crest Mirror' },
+  { photo: PHOTOS.brassLamp, cap: 'Study Desk · Heritage Brass Shade Lamp' }
+];
+
+const HOTSPOTS = [
+  { pid: 1, x: 31, y: 48, pos: 'left' },
+  { pid: 4, x: 79, y: 28, pos: 'right' },
+  { pid: 3, x: 79, y: 74, pos: 'flip right' }
+];
+
+/* ================= DIRECT IMAGE RENDERER WITH SAFE FALLBACK ================= */
+function imgEl(photo, alt, cls='', pid=''){
+  const fallback = `https://placehold.co/800x1000/F2ECE4/4A1C40?text=${encodeURIComponent(alt || 'DecorT')}`;
+  return `<img ${cls?`class="${cls}" `:''}src="${photo}" alt="${alt}" loading="lazy" ${pid?`data-pid="${pid}"`:''} onerror="this.onerror=null;this.src='${fallback}'">`;
+}
+
+/* ================= STATE & HELPERS ================= */
+const state = {
+  group: 'all',
+  q: '',
+  selSize: {},  // { pid: sizeIndex (0=Small, 1=Medium, 2=Large) }
+  cart: [],     // [{ id, sizeKey, sizeDim, unitPrice, qty }]
+  lastRemoved: null, // { items: [...], promo: string|null, label: string }
+  promo: null,
+  pay: 'card',
+  galIdx: 0
+};
+
+PRODUCTS.forEach(p => {
+  state.selSize[p.id] = 1; // Default to Medium
+});
+
+try {
+  const c = JSON.parse(localStorage.getItem('decort-cart-v3') || '[]');
+  if (Array.isArray(c)) {
+    state.cart = c.filter(i => PRODUCTS.some(p => p.id === i.id) && i.qty > 0 && typeof i.unitPrice === 'number');
+  }
+  state.promo = localStorage.getItem('decort-promo') || null;
+} catch(e) {}
+
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const prod = id => PRODUCTS.find(p => p.id === id);
+const activeSize = p => p.sizes[state.selSize[p.id] ?? 1] || p.sizes[0];
+const money = n => '$' + (Math.round(n*100)%100===0 ? Math.round(n).toLocaleString('en-US') : n.toFixed(2));
+const money2 = n => '$' + n.toFixed(2);
+const stars = r => { const f=Math.round(r); return '★'.repeat(f)+'☆'.repeat(5-f); };
+
+/* ================= TOASTS WITH UNDO SUPPORT ================= */
+function toast(msg, type='success', title, undoCallback=null){
+  const titles = {success:'Done',error:'Something’s off',warn:'Heads up'};
+  const icons = {success:'✓',error:'!',warn:'i'};
+  const el = document.createElement('div');
+  el.className = 'toast '+type;
+  el.setAttribute('role', type==='success'?'status':'alert');
+  el.innerHTML = `
+    <span class="ic" aria-hidden="true">${icons[type]}</span>
+    <div><b>${title||titles[type]}</b>${msg}</div>
+    <div class="t-act">
+      ${undoCallback ? `<button class="t-undo" type="button">Undo</button>` : ''}
+      <button class="x" aria-label="Dismiss">×</button>
+    </div>`;
+  const box = $('#toasts');
+  box.appendChild(el);
+  while(box.children.length > 3) box.firstChild.remove();
+  requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.add('in')));
+  const kill = () => { el.classList.remove('in'); setTimeout(()=>el.remove(),500); };
+  el.querySelector('.x').onclick = kill;
+  if(undoCallback){
+    el.querySelector('.t-undo').onclick = () => {
+      undoCallback();
+      kill();
+    };
+  }
+  setTimeout(kill, undoCallback ? 6000 : (type==='success' ? 3200 : 4600));
+}
+
+/* ================= HERO & STORY IMAGES ================= */
+$('#heroMain').innerHTML = imgEl(PHOTOS.baroqueFront, 'Baroque Gold Filigree Oval Mirror in antique gold leaf');
+$('#heroSide').innerHTML = imgEl(PHOTOS.opalineLamp, 'Brass Mushroom Glow Lamp glowing warmly');
+$('#storyImg').innerHTML = imgEl(PHOTOS.rococoMirror, 'Scalloped Gilded Crest Mirror detail');
+
+/* ================= FILTERS & CATALOG ================= */
+function renderTabs(){
+  $('#tabs').innerHTML = TABS.map(([k,l]) => `<button class="tab" data-tab="${k}" aria-pressed="${state.group===k && !state.q}">${l}</button>`).join('');
+  $$('.nav a[data-group]').forEach(a => a.classList.toggle('active', a.dataset.group===state.group && !state.q));
+}
+function setGroup(g){
+  state.group = g; state.q = ''; $('#searchInput').value=''; $('#suggest').classList.remove('show');
+  renderTabs(); renderGrid();
+}
+$('#tabs').addEventListener('click', e => { const b=e.target.closest('[data-tab]'); if(b) setGroup(b.dataset.tab); });
+document.addEventListener('click', e => {
+  const a = e.target.closest('a[data-group]');
+  if(a){ setGroup(a.dataset.group); closeNav(); }
+  const ph = e.target.closest('a[data-ph], a[href="#"]');
+  if(ph){ e.preventDefault(); toast('This page is coming soon. We’re still setting up the studio.','warn','Not available yet'); }
+});
+
+function filtered(){
+  const cats = GROUPS[state.group];
+  const q = state.q.toLowerCase();
+  return PRODUCTS.filter(p => (!cats || cats.includes(p.cat)) && (!q || (p.name+' '+p.material+' '+CATNAME[p.cat]+' '+p.kind).toLowerCase().includes(q)));
+}
+
+function sizesHTML(p){
+  const curIdx = state.selSize[p.id] ?? 1;
+  return `<div class="sizes" role="radiogroup" aria-label="Size for ${p.name}">` +
+    p.sizes.map((s, idx) => `
+      <button class="sz-btn" role="radio" aria-checked="${curIdx===idx}" data-pid="${p.id}" data-sz="${idx}" title="${s.key} (${s.fullDim}) — ${money(s.price)}">
+        <span>${s.key}</span><small>· ${s.dim}</small>
+      </button>`).join('') +
+    `</div>`;
+}
+
+function cardHTML(p, i){
+  const sz = activeSize(p);
+  return `<article class="card" style="animation-delay:${i*55}ms">
+    <div class="card-media" data-open="${p.id}">
+      <span class="badge">${p.tag}</span><span class="count-chip">${p.photos.length} photos</span>
+      ${imgEl(p.photos[0],p.name,'',p.id)}
+      <button class="vp" data-open="${p.id}" aria-label="View all photos of ${p.name}">View Details &amp; Photos</button>
+    </div>
+    <div class="card-body">
+      <div class="card-top">
+        <h3>${p.name}</h3>
+        <span class="price" data-price="${p.id}">${money(sz.price)}</span>
+      </div>
+      <div class="meta"><span class="stars" aria-hidden="true">${stars(p.rating)}</span><span>${p.rating} (${p.reviews})</span></div>
+      <span class="dims" data-dims="${p.id}">${sz.fullDim}</span>
+      ${sizesHTML(p)}
+      <button class="btn btn-primary add" data-add="${p.id}" data-addbtn="${p.id}">Add to Bag — ${money(sz.price)}</button>
+    </div></article>`;
+}
+
+function renderGrid(){
+  const list = filtered();
+  const parts = [];
+  if(state.q) parts.push(`“${state.q}”`);
+  $('#gridNote').textContent = `${list.length} piece${list.length!==1?'s':''}` + (parts.length?` · ${parts.join(' · ')}`:'');
+  $('#grid').innerHTML = list.length ? list.map(cardHTML).join('') :
+    `<div class="empty"><h3 style="font-size:1.7rem">Nothing matches yet</h3><p>Try another category or clear your search.</p></div>`;
+}
+
+function updateProductUI(pid){
+  const p = prod(pid);
+  const sz = activeSize(p);
+  const curIdx = state.selSize[pid] ?? 1;
+
+  $$(`.sz-btn[data-pid="${pid}"]`).forEach(b => b.setAttribute('aria-checked', +b.dataset.sz===curIdx));
+  $$(`[data-price="${pid}"]`).forEach(el => el.textContent = money(sz.price));
+  $$(`[data-dims="${pid}"]`).forEach(el => el.textContent = sz.fullDim);
+  $$(`[data-addbtn="${pid}"]`).forEach(el => el.textContent = `Add to Bag — ${money(sz.price)}`);
+}
+
+document.addEventListener('click', e => {
+  const sz = e.target.closest('.sz-btn');
+  if(sz){
+    const pid = +sz.dataset.pid;
+    state.selSize[pid] = +sz.dataset.sz;
+    updateProductUI(pid);
+    return;
+  }
+  const op = e.target.closest('[data-open]');
+  if(op){ openGallery(+op.dataset.open, op); return; }
+  const add = e.target.closest('[data-add]');
+  if(add){ addToCart(+add.dataset.add); return; }
+});
+
+/* ================= NAV / SEARCH ================= */
+const nav = $('#nav'), menuBtn = $('#menuBtn');
+function closeNav(){ nav.classList.remove('open'); menuBtn.setAttribute('aria-expanded','false'); if(!anyOpen()) $('#overlay').classList.remove('show'); }
+menuBtn.addEventListener('click', () => { const o = nav.classList.toggle('open'); menuBtn.setAttribute('aria-expanded',o); $('#overlay').classList.toggle('show',o); });
+$('.nav a[data-link]').addEventListener('click', closeNav);
+
+const search = $('#search'), sInput = $('#searchInput'), sugg = $('#suggest');
+$('#searchBtn').addEventListener('click', () => {
+  const open = search.classList.toggle('open'); $('#searchBtn').setAttribute('aria-expanded',open);
+  if(open) sInput.focus(); else sugg.classList.remove('show');
+});
+let sTimer;
+sInput.addEventListener('input', () => {
+  const q = sInput.value.trim();
+  state.q = q; renderTabs(); renderGrid();
+  const hits = q ? PRODUCTS.filter(p => (p.name+' '+p.material+' '+p.kind).toLowerCase().includes(q.toLowerCase())).slice(0,4) : [];
+  sugg.innerHTML = !q ? '' : hits.length ? hits.map(p => {
+    return `<button data-open="${p.id}"><span class="th">${imgEl(p.photos[0],p.name,'',p.id)}</span><span>${p.name}<small>From ${money(p.sizes[0].price)} · ${CATNAME[p.cat]}</small></span></button>`;
+  }).join('') : `<div class="none">No pieces found for “${q}”.</div>`;
+  sugg.classList.toggle('show', !!q);
+  clearTimeout(sTimer);
+  if(q.length>=2 && !hits.length) sTimer = setTimeout(()=>toast(`No products match “${q}”. Try “mirror”, “lamp” or “gold”.`,'error','No results'),650);
+});
+sInput.addEventListener('keydown', e => { if(e.key==='Enter'){ e.preventDefault(); sugg.classList.remove('show'); $('#shop').scrollIntoView({behavior:'smooth'}); } });
+document.addEventListener('click', e => { if(!e.target.closest('#search')) sugg.classList.remove('show'); });
+sugg.addEventListener('click', e => { if(e.target.closest('[data-open]')) sugg.classList.remove('show'); });
+
+/* ================= LOOKBOOK PINS ================= */
+$('#look').insertAdjacentHTML('beforeend', HOTSPOTS.map(h => {
+  const p = prod(h.pid);
+  const sz = activeSize(p);
+  return `<div class="pin ${h.pos}" style="left:${h.x}%;top:${h.y}%">
+    <button class="pin-dot" aria-label="${p.name}, ${money(sz.price)}" aria-expanded="false"></button>
+    <div class="pop" role="group" aria-label="${p.name}">
+      <span class="th">${imgEl(p.photos[0],p.name,'',p.id)}</span>
+      <div><h4>${p.name}</h4><p>${sz.key} · ${money(sz.price)}</p></div>
+      <button class="btn btn-primary" data-add="${p.id}">Add to Bag</button>
+    </div></div>`;
+}).join(''));
+$$('.pin').forEach(pin => {
+  const dot = pin.querySelector('.pin-dot');
+  dot.addEventListener('click', e => {
+    e.stopPropagation();
+    const was = pin.classList.contains('open');
+    $$('.pin.open').forEach(p => { p.classList.remove('open'); p.querySelector('.pin-dot').setAttribute('aria-expanded','false'); });
+    if(!was){ pin.classList.add('open'); dot.setAttribute('aria-expanded','true'); }
+  });
+});
+document.addEventListener('click', e => { if(!e.target.closest('.pin')) $$('.pin.open').forEach(p => p.classList.remove('open')); });
+
+/* ================= LAYERS (drawer / modals) ================= */
+let lastFocus = null;
+const layers = {drawer:$('#drawer'), gal:$('#galModal'), rev:$('#revModal'), co:$('#coModal')};
+const anyOpen = () => Object.values(layers).some(l => l.classList.contains('show')) || nav.classList.contains('open');
+function openLayer(key, trigger){
+  lastFocus = trigger || document.activeElement;
+  const l = layers[key]; l.classList.add('show'); l.setAttribute('aria-hidden','false');
+  $('#overlay').classList.add('show'); document.body.style.overflow='hidden';
+  updateFloat();
+  setTimeout(() => { const f = l.querySelector('button:not([style*="display:none"]), input, select, textarea, a'); f && f.focus(); }, 60);
+}
+function closeLayer(key){
+  const l = layers[key]; if(!l.classList.contains('show')) return;
+  l.classList.remove('show'); l.setAttribute('aria-hidden','true');
+  if(!anyOpen()){ $('#overlay').classList.remove('show'); document.body.style.overflow=''; }
+  updateFloat();
+  lastFocus && lastFocus.focus && lastFocus.focus();
+}
+function closeAll(){ Object.keys(layers).forEach(closeLayer); closeNav(); }
+$('#overlay').addEventListener('click', closeAll);
+[layers.gal, layers.rev, layers.co].forEach(m => m.addEventListener('click', e => { if(e.target===m) closeAll(); }));
+document.addEventListener('click', e => { const c = e.target.closest('[data-close]'); if(c) closeLayer(c.dataset.close); });
+document.addEventListener('keydown', e => {
+  if(e.key==='Escape'){ closeAll(); sugg.classList.remove('show'); if(search.classList.contains('open') && !sInput.value){ search.classList.remove('open'); } }
+  if(layers.gal.classList.contains('show')){
+    if(e.key==='ArrowRight') galStep(1);
+    if(e.key==='ArrowLeft') galStep(-1);
+  }
+  if(e.key==='Tab'){
+    const open = Object.values(layers).find(l => l.classList.contains('show')); if(!open) return;
+    const f = [...open.querySelectorAll('button:not([disabled]), input, select, textarea, a[href]')].filter(x => x.offsetParent!==null);
+    if(!f.length) return;
+    const first=f[0], last=f[f.length-1];
+    if(e.shiftKey && document.activeElement===first){ e.preventDefault(); last.focus(); }
+    else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); }
+  }
+});
+
+/* ================= GALLERY MODAL ================= */
+let galPid = null;
+function openGallery(pid, trigger){
+  galPid = pid; state.galIdx = 0;
+  const p = prod(pid);
+  const sz = activeSize(p);
+  $('#galBox').innerHTML = `
+    <button class="close" data-close="gal" aria-label="Close gallery">×</button>
+    <div class="gal">
+      <div class="gal-main" id="galMain" aria-live="polite"></div>
+      <div class="thumbs" id="thumbs" role="group" aria-label="Product photos">${p.photos.map((ph,i)=>`<button class="thumb" data-thumb="${i}" aria-label="Photo ${i+1} of ${p.photos.length}" aria-current="${i===0}">${imgEl(ph,p.name+' thumbnail '+(i+1),'',p.id)}</button>`).join('')}</div>
+    </div>
+    <div class="modal-info">
+      <span class="eyebrow dark">${CATNAME[p.cat]}</span>
+      <h2 id="galTitle">${p.name}</h2>
+      <div class="meta"><span class="stars" aria-hidden="true">${stars(p.rating)}</span><span>${p.rating} · ${p.reviews} verified buyer reviews</span></div>
+      <div class="price" data-price="${p.id}" style="font-size:1.45rem;margin-top:.5rem">${money(sz.price)}</div>
+      <dl class="specs">
+        <div><dt>Dimensions (H × W × D)</dt><dd data-dims="${p.id}">${sz.fullDim}</dd></div>
+        <div><dt>Weight</dt><dd>${p.weight}</dd></div>
+        <div class="wide"><dt>Material &amp; origin</dt><dd>${p.material} — ${p.origin}</dd></div>
+      </dl>
+      <div class="note-box"><b>Styling notes</b>${p.note}</div>
+      <div class="opt-lbl">Select Size (Price adjusts by dimension)</div>
+      ${sizesHTML(p)}
+      <button class="btn btn-primary btn-block" style="margin-top:.8rem" data-add="${p.id}" data-addbtn="${p.id}">Add to Bag — ${money(sz.price)}</button>
+    </div>`;
+  showGalPhoto(0);
+  openLayer('gal', trigger);
+}
+function showGalPhoto(i){
+  const p = prod(galPid); const n = p.photos.length;
+  state.galIdx = (i+n)%n;
+  $('#galMain').innerHTML = imgEl(p.photos[state.galIdx],p.name+' photo '+(state.galIdx+1),'',p.id) +
+    `<button class="gal-nav prev" data-gstep="-1" aria-label="Previous photo">‹</button><button class="gal-nav next" data-gstep="1" aria-label="Next photo">›</button>`;
+  $$('#thumbs .thumb').forEach((t,idx) => t.setAttribute('aria-current', idx===state.galIdx));
+}
+const galStep = d => showGalPhoto(state.galIdx+d);
+$('#galBox').addEventListener('click', e => {
+  const t = e.target.closest('[data-thumb]'); if(t) showGalPhoto(+t.dataset.thumb);
+  const g = e.target.closest('[data-gstep]'); if(g) galStep(+g.dataset.gstep);
+});
+
+/* ================= CART + UNDO / REMOVE SYSTEM ================= */
+const FREE = 150, SHIP = 14, TAX = .08;
+const saveCart = () => {
+  try {
+    localStorage.setItem('decort-cart-v3', JSON.stringify(state.cart));
+    state.promo ? localStorage.setItem('decort-promo', state.promo) : localStorage.removeItem('decort-promo');
+  } catch(e) {}
+};
+const count = () => state.cart.reduce((s,i)=>s+i.qty,0);
+const subtotal = () => state.cart.reduce((s,i)=>s+i.unitPrice*i.qty,0);
+
+function totals(){
+  const sub = subtotal();
+  const disc = state.promo==='DECORT10' ? sub*.10 : 0;
+  const ship = sub===0 ? 0 : (sub>=FREE ? 0 : SHIP);
+  const tax = (sub-disc)*TAX;
+  return {sub,disc,ship,tax,total:sub-disc+ship+tax};
+}
+
+function addToCart(id){
+  const p = prod(id);
+  const sz = activeSize(p);
+  const ex = state.cart.find(i => i.id===id && i.sizeKey===sz.key);
+  if(ex){
+    ex.qty++;
+  } else {
+    state.cart.push({
+      id,
+      sizeKey: sz.key,
+      sizeDim: sz.dim,
+      unitPrice: sz.price,
+      qty: 1
+    });
+  }
+  saveCart();
+  renderCart();
+  toast(`${p.name} (${sz.key}) added to your bag.`, 'success', 'Added to bag');
+  $('#cartPill').animate([{transform:'scale(1)'},{transform:'scale(1.1)'},{transform:'scale(1)'}],{duration:380});
+}
+
+function recordRemovalAndNotify(removedItems, labelText, prevPromo=null){
+  state.lastRemoved = {
+    items: removedItems.map(x => ({...x})),
+    promo: prevPromo,
+    label: labelText
+  };
+  renderCart();
+  toast(`${labelText} removed from your bag.`, 'warn', 'Item removed', undoLastRemoval);
+}
+
+function undoLastRemoval(){
+  if(!state.lastRemoved || !state.lastRemoved.items.length) return;
+  const restored = state.lastRemoved;
+  restored.items.forEach(item => {
+    const existing = state.cart.find(c => c.id===item.id && c.sizeKey===item.sizeKey);
+    if(existing){
+      existing.qty += item.qty;
+    } else {
+      state.cart.push({...item});
+    }
+  });
+  if(restored.promo && !state.promo){
+    state.promo = restored.promo;
+  }
+  state.lastRemoved = null;
+  saveCart();
+  renderCart();
+  toast(`${restored.label} restored to your bag.`, 'success', 'Restored');
+}
+
+function updateFloat(){
+  const show = count()>0 && !layers.drawer.classList.contains('show') && !layers.co.classList.contains('show') && !layers.gal.classList.contains('show') && !layers.rev.classList.contains('show');
+  $('#floatBar').classList.toggle('show', show);
+}
+
+function payOptsHTML(t){
+  const opts = [
+    ['card','Credit / Debit Card',money2(t.total)],
+    ['wallet','Apple Pay / Google Pay',money2(t.total)],
+    ['klarna','Klarna 4× Interest-Free','4 × '+money2(t.total/4)],
+    ['paypal','PayPal',money2(t.total)]
+  ];
+  return `<div class="pay-title" id="payLbl">Payment method</div><div class="pay-opts" role="radiogroup" aria-labelledby="payLbl">` +
+    opts.map(([k,l,a]) => `<button class="pay-opt" role="radio" aria-checked="${state.pay===k}" data-pay="${k}">${l}<small>${a}</small></button>`).join('') + `</div>`;
+}
+
+function renderCart(){
+  const n = count(), t = totals();
+  $('#pillCount').textContent = `(${n})`;
+  $('#pillTotal').textContent = money(t.sub);
+  $('#floatN').textContent = n;
+  $('#floatT').textContent = '• ' + money(t.total);
+  $('#cartPill').setAttribute('aria-label', `Open bag, ${n} item${n!==1?'s':''}, subtotal ${money(t.sub)}`);
+
+  // Toggle "Clear All" button
+  $('#clearCartBtn').style.display = n > 0 ? 'inline-block' : 'none';
+
+  // Toggle Undo Banner inside drawer
+  const undoBanner = $('#undoBanner');
+  if(state.lastRemoved && state.lastRemoved.items.length){
+    $('#undoBannerText').innerHTML = `Removed <b>${state.lastRemoved.label}</b>`;
+    undoBanner.classList.add('show');
+  } else {
+    undoBanner.classList.remove('show');
+  }
+
+  const pct = Math.min(100, t.sub/FREE*100);
+  $('#shipMsg').innerHTML = (t.sub>=FREE ? `<b>You’ve unlocked complimentary insured shipping.</b>` : `You’re <b>${money(FREE-t.sub)}</b> away from complimentary insured shipping.`) +
+    `<div class="bar" role="progressbar" aria-label="Free shipping progress" aria-valuemin="0" aria-valuemax="${FREE}" aria-valuenow="${Math.min(t.sub,FREE)}"><i style="width:${pct}%"></i></div>`;
+
+  $('#items').innerHTML = n ? state.cart.map((i,idx) => {
+    const p = prod(i.id);
+    return `
+    <div class="line-item">
+      <div class="th">${imgEl(p.photos[0],p.name,'',p.id)}</div>
+      <div>
+        <h3>${p.name}</h3>
+        <span class="sz-tag">${i.sizeKey} · ${i.sizeDim} (${money(i.unitPrice)} ea)</span>
+        <div class="qty">
+          <button data-q="${idx}" data-d="-1" aria-label="Decrease quantity of ${p.name}">−</button>
+          <span aria-live="polite">${i.qty}</span>
+          <button data-q="${idx}" data-d="1" aria-label="Increase quantity of ${p.name}">+</button>
+        </div>
+      </div>
+      <div>
+        <div class="li-price">${money(i.unitPrice*i.qty)}</div>
+        <button class="rm" data-rm="${idx}" aria-label="Remove ${p.name}">Remove</button>
+      </div>
+    </div>`;
+  }).join('') : `<div class="cart-empty"><h3>Your bag is empty</h3><p>Add a mirror, lamp, or vessel to begin your collection.</p></div>`;
+
+  $('#drawerFoot').innerHTML = `
+    <div class="sum"><span>Subtotal</span><span>${money2(t.sub)}</span></div>
+    ${t.disc?`<div class="sum disc"><span>Promo DECORT10 (−10%)</span><span>−${money2(t.disc)}</span></div>`:''}
+    <div class="sum"><span>Estimated shipping</span><span>${n?(t.ship?money2(t.ship):'Complimentary'):'—'}</span></div>
+    <div class="sum"><span>Estimated tax (8%)</span><span>${money2(t.tax)}</span></div>
+    <div class="sum total"><span>Total</span><span>${money2(t.total)}</span></div>
+    ${payOptsHTML(t)}
+    <button class="btn btn-primary btn-block" id="checkoutBtn">Proceed to Secure Checkout</button>
+    <p class="fine">Plastic-free packaging · Breakage-free transit guarantee</p>`;
+  updateFloat();
+}
+
+$('#items').addEventListener('click', e => {
+  const q = e.target.closest('[data-q]'), r = e.target.closest('[data-rm]');
+  if(q){
+    const idx = +q.dataset.q, it = state.cart[idx], delta = +q.dataset.d;
+    if(it.qty + delta < 1){
+      const p = prod(it.id);
+      const removedCopy = {...it, qty: 1};
+      state.cart.splice(idx, 1);
+      saveCart();
+      recordRemovalAndNotify([removedCopy], `${p.name} (${it.sizeKey})`);
+    } else {
+      it.qty += delta;
+      saveCart();
+      renderCart();
+    }
+  }
+  if(r){
+    const idx = +r.dataset.rm;
+    const it = state.cart[idx];
+    const p = prod(it.id);
+    const removedCopy = {...it};
+    state.cart.splice(idx, 1);
+    saveCart();
+    recordRemovalAndNotify([removedCopy], `${p.name} (${it.sizeKey})`);
+  }
+});
+
+$('#clearCartBtn').addEventListener('click', () => {
+  if(!state.cart.length) return;
+  const allCopy = state.cart.map(x => ({...x}));
+  const prevPromo = state.promo;
+  const totalCount = count();
+  state.cart = [];
+  state.promo = null;
+  saveCart();
+  recordRemovalAndNotify(allCopy, `${totalCount} item${totalCount>1?'s':''}`, prevPromo);
+});
+
+$('#undoBannerBtn').addEventListener('click', undoLastRemoval);
+
+$('#drawerFoot').addEventListener('click', e => {
+  const p = e.target.closest('[data-pay]');
+  if(p){ state.pay = p.dataset.pay; $$('#drawerFoot .pay-opt').forEach(b => b.setAttribute('aria-checked', b.dataset.pay===state.pay)); return; }
+  if(e.target.id==='checkoutBtn') startCheckout();
+});
+$('#cartPill').addEventListener('click', e => openLayer('drawer', e.currentTarget));
+$('#floatBar').addEventListener('click', e => openLayer('drawer', e.currentTarget));
+
+/* promo */
+$('#promoForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const code = $('#promoInput').value.trim().toUpperCase();
+  if(!code){ toast('Enter a promo code first.','warn','No code entered'); return; }
+  if(!count()){ toast('Add a piece to your bag before applying a code.','warn','Bag is empty'); return; }
+  if(code==='DECORT10'){
+    if(state.promo==='DECORT10'){ toast('DECORT10 is already applied.','warn','Already applied'); return; }
+    state.promo='DECORT10'; saveCart(); renderCart(); toast('DECORT10 applied — 10% off your subtotal.','success','Promo applied');
+  } else { toast(`“${code}” isn’t a valid promo code.`,'error','Invalid code'); }
+  $('#promoInput').value='';
+});
+
+/* ================= CHECKOUT (simulated) ================= */
+const PAYNAME = {card:'Credit / Debit Card',wallet:'Apple Pay / Google Pay',klarna:'Klarna 4× Interest-Free',paypal:'PayPal'};
+function startCheckout(){
+  if(!count()){ toast('Your bag is empty. Add a piece before checking out.','error','Cannot checkout'); return; }
+  const t = totals();
+  $('#coBox').innerHTML = `
+    <button class="close" data-close="co" aria-label="Close checkout">×</button>
+    <h2 id="coTitle">Secure Checkout</h2>
+    <p style="color:var(--muted);font-size:.86rem">Demo checkout — no payment is taken. Paying with <b>${PAYNAME[state.pay]}</b> · <b>${state.pay==='klarna'?'4 × '+money2(t.total/4):money2(t.total)}</b></p>
+    <form id="coForm" novalidate>
+      <div class="field"><label for="coName">Full name</label><input id="coName" autocomplete="name"><div class="err" data-err="coName"></div></div>
+      <div class="field"><label for="coEmail">Email</label><input id="coEmail" type="email" autocomplete="email"><div class="err" data-err="coEmail"></div></div>
+      <div class="field"><label for="coAddr">Delivery address</label><input id="coAddr" autocomplete="street-address"><div class="err" data-err="coAddr"></div></div>
+      ${state.pay==='card'?`<div class="row2"><div class="field"><label for="coCard">Card number</label><input id="coCard" inputmode="numeric" placeholder="4242 4242 4242 4242"><div class="err" data-err="coCard"></div></div><div class="field"><label for="coExp">Expiry</label><input id="coExp" placeholder="MM/YY"><div class="err" data-err="coExp"></div></div></div>`:''}
+      <button class="btn btn-primary btn-block" type="submit" style="margin-top:1.4rem">Place order · ${money2(t.total)}</button>
+    </form>`;
+  closeLayer('drawer'); openLayer('co', $('#cartPill'));
+  const rules = {
+    coName:v=>v.trim().length>=2?'':'Please enter your full name.',
+    coEmail:v=>/^\S+@\S+\.\S+$/.test(v)?'':'Enter a valid email address.',
+    coAddr:v=>v.trim().length>=6?'':'Please enter your delivery address.',
+    coCard:v=>/^\d{13,19}$/.test(v.replace(/\s/g,''))?'':'Enter a valid card number.',
+    coExp:v=>/^(0[1-9]|1[0-2])\s?\/\s?\d{2}$/.test(v.trim())?'':'Use MM/YY.'
+  };
+  const form = $('#coForm');
+  const check = el => { const m = rules[el.id](el.value); el.setAttribute('aria-invalid', m?'true':'false'); form.querySelector(`[data-err="${el.id}"]`).textContent = m; return !m; };
+  form.querySelectorAll('input').forEach(el => { el.addEventListener('input', () => { if(el.hasAttribute('aria-invalid')) check(el); }); el.addEventListener('blur', () => { if(el.value) check(el); }); });
+  form.addEventListener('submit', ev => {
+    ev.preventDefault();
+    const bad = [...form.querySelectorAll('input')].filter(el => !check(el));
+    if(bad.length){ bad[0].focus(); toast('Please complete the highlighted checkout fields.','error','Incomplete details'); return; }
+    const btn = form.querySelector('button[type=submit]'); btn.disabled = true; btn.textContent = 'Processing…';
+    setTimeout(() => {
+      const ref = 'DT-' + Math.floor(100000+Math.random()*900000);
+      $('#coBox').innerHTML = `<button class="close" data-close="co" aria-label="Close">×</button><div class="done"><div class="tick">✓</div><h2 id="coTitle">Thank you</h2><p style="color:var(--muted);margin:.6rem 0 1.3rem">Order <b>${ref}</b> is confirmed. Each piece will be wrapped by hand, plastic-free, and shipped fully insured.</p><button class="btn btn-primary" data-close="co">Continue browsing</button></div>`;
+      state.cart = []; state.promo = null; state.lastRemoved = null; saveCart(); renderCart();
+      toast(`Order ${ref} placed successfully.`,'success','Order confirmed');
+      $('#coBox').querySelector('.btn').focus();
+    }, 1200);
+  });
+}
+
+/* ================= REVIEWS ================= */
+function reviewHTML(r,i){
+  const p = prod(r.pid);
+  const photo = r.photo ? `<div class="ph">${imgEl(r.photo,'Customer home styled with '+p.name)}</div>` : `<div class="ph">${imgEl(p.photos[0],p.name,'',p.id)}</div>`;
+  return `<figure class="review" style="animation-delay:${i*70}ms">${photo}<div class="txt"><span class="stars" aria-label="${r.stars} out of 5">${stars(r.stars)}</span><blockquote>“${r.quote}”</blockquote><cite>${r.name} — ${r.city}<br>on ${p.name}</cite><span class="ver">${r.fresh?'New review':'✓ Verified buyer'}</span></div></figure>`;
+}
+function renderReviews(){
+  $('#revGrid').innerHTML = REVIEWS.map(reviewHTML).join('');
+  $('#showGrid').innerHTML = SHOWCASE.map(s => `<figure class="ph">${imgEl(s.photo,s.cap)}<figcaption>${s.cap}</figcaption></figure>`).join('');
+}
+function esc(s){ return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+$('#writeRev').addEventListener('click', e => {
+  let rating = 0;
+  $('#revBox').innerHTML = `
+    <button class="close" data-close="rev" aria-label="Close review form">×</button>
+    <h2 id="revTitle">Write a Review</h2>
+    <p style="color:var(--muted);font-size:.86rem">Share how a DecorT piece looks in your home.</p>
+    <form id="revForm" novalidate>
+      <div class="field"><label for="rvProd">Product</label><select id="rvProd">${PRODUCTS.map(p=>`<option value="${p.id}">${p.name}</option>`).join('')}</select></div>
+      <fieldset class="field" style="border:0"><legend>Your rating</legend><div class="starpick" id="starPick" role="radiogroup" aria-label="Rating">${[1,2,3,4,5].map(n=>`<button type="button" role="radio" aria-checked="false" aria-label="${n} star${n>1?'s':''}" data-star="${n}">★</button>`).join('')}</div><div class="err" data-err="rating"></div></fieldset>
+      <div class="row2"><div class="field"><label for="rvName">Name</label><input id="rvName" autocomplete="name"><div class="err" data-err="rvName"></div></div>
+      <div class="field"><label for="rvEmail">Email (not published)</label><input id="rvEmail" type="email" autocomplete="email"><div class="err" data-err="rvEmail"></div></div></div>
+      <div class="field"><label for="rvText">Your review</label><textarea id="rvText" rows="4" maxlength="400" placeholder="How does it look in your space?"></textarea><div class="counter"><span id="rvCount">0</span>/400 · min 20</div><div class="err" data-err="rvText"></div></div>
+      <button class="btn btn-primary btn-block" type="submit" style="margin-top:1.2rem">Submit review</button>
+    </form>`;
+  openLayer('rev', e.currentTarget);
+  const rules = {
+    rvName:v=>v.trim().length>=2?'':'Please enter your name.',
+    rvEmail:v=>/^\S+@\S+\.\S+$/.test(v)?'':'Enter a valid email address.',
+    rvText:v=>v.trim().length>=20?'':'Please write at least 20 characters.'
+  };
+  const form = $('#revForm');
+  const check = el => { const m = rules[el.id](el.value); el.setAttribute('aria-invalid', m?'true':'false'); form.querySelector(`[data-err="${el.id}"]`).textContent = m; return !m; };
+  ['rvName','rvEmail','rvText'].forEach(id => { const el = $('#'+id); el.addEventListener('input', () => { check(el); if(id==='rvText') $('#rvCount').textContent = el.value.length; }); el.addEventListener('blur', () => { if(el.value) check(el); }); });
+  const setStars = n => { rating = n; $$('#starPick button').forEach(b => { b.classList.toggle('on', +b.dataset.star<=n); b.setAttribute('aria-checked', +b.dataset.star===n); }); form.querySelector('[data-err="rating"]').textContent=''; };
+  $('#starPick').addEventListener('click', ev => { const b = ev.target.closest('[data-star]'); if(b) setStars(+b.dataset.star); });
+  form.addEventListener('submit', ev => {
+    ev.preventDefault();
+    const okName = check($('#rvName')), okEmail = check($('#rvEmail')), okText = check($('#rvText'));
+    if(!rating) form.querySelector('[data-err="rating"]').textContent = 'Please choose a star rating.';
+    if(!(okName && okEmail && okText && rating)){
+      toast('Please complete all fields in your review before submitting.','error','Review incomplete');
+      (!okName?$('#rvName'):!okEmail?$('#rvEmail'):!okText?$('#rvText'):$('#starPick button')).focus(); return;
+    }
+    const pid = +$('#rvProd').value;
+    REVIEWS.unshift({name:esc($('#rvName').value.trim()),city:'DecorT collector',pid,stars:rating,quote:esc($('#rvText').value.trim()),fresh:true});
+    renderReviews(); closeLayer('rev'); $('#reviews').scrollIntoView({behavior:'smooth'});
+    toast('Thank you — your review is live on the page.','success','Review submitted');
+  });
+});
+
+/* ================= NEWSLETTER ================= */
+$('#newsForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const inp = $('#newsEmail'), v = inp.value.trim(), m = $('#newsMsg');
+  if(!v){ inp.setAttribute('aria-invalid','true'); m.textContent=''; toast('Please enter your email to join the Collector’s List.','error','Email required'); inp.focus(); return; }
+  if(!/^\S+@\S+\.\S+$/.test(v)){ inp.setAttribute('aria-invalid','true'); toast('That email address doesn’t look right.','error','Invalid email'); inp.focus(); return; }
+  inp.removeAttribute('aria-invalid'); m.textContent='Welcome to the Collector’s List — your 10% code is on its way.';
+  toast('You’re on the list. Check your inbox for 10% off.','success','Subscribed'); e.target.reset();
+});
+
+/* ================= REVEAL ================= */
+const io = new IntersectionObserver(es => es.forEach(en => { if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } }), {threshold:.12, rootMargin:'0px 0px -40px 0px'});
+$$('.reveal').forEach(el => io.observe(el));
+
+/* ================= INIT ================= */
+renderTabs(); renderGrid(); renderReviews(); renderCart();
+</script>
+</body>
+</html>
